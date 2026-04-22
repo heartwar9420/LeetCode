@@ -1,4 +1,4 @@
-// Last updated: 2026/4/22 上午11:48:09
+// Last updated: 2026/4/22 上午11:50:24
 1function twoSum(numbers: number[], target: number): number[] {
 2    let left = 0, right = numbers.length - 1
 3    while (left < right) {
