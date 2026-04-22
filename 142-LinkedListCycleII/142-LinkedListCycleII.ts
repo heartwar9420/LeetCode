@@ -1,4 +1,4 @@
-// Last updated: 2026/4/22 上午9:35:44
+// Last updated: 2026/4/22 上午9:36:49
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -12,13 +12,13 @@
 11 */
 12
 13function detectCycle(head: ListNode | null): ListNode | null {
-14    let slow = head
-15    let fast = head
+14    let slow: ListNode | null = head;
+15    let fast: ListNode | null = head
 16    while (fast && fast.next){
 17        slow = slow.next
 18        fast = fast.next.next
 19        if(fast === slow){
-20            let p = head
+20            let p: ListNode | null = head;
 21            while (p!==slow){
 22                p = p.next
 23                slow = slow.next
