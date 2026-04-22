@@ -1,4 +1,4 @@
-// Last updated: 2026/4/22 上午8:54:55
+// Last updated: 2026/4/22 上午8:57:08
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -16,20 +16,22 @@
 15    let bigHead = new ListNode(-1)
 16    let p1 = smallHead
 17    let p2 = bigHead
-18
-19    while(head!==null){
-20        if(head.val<x){
-21            p1.next = head
-22            p1 = p1.next
-23        }else{
-24            p2.next = head
-25            p2 = p2.next
-26        }
-27        head = head.next
-28    }
-29    p2.next = null
-30    p1.next = bigHead.next
-31    
-32    return smallHead.next
-33
-34};
+18    let p = head
+19
+20    while(p !==null){
+21        if(p.val<x){
+22            p1.next = p
+23            p1 = p1.next
+24        }else{
+25            p2.next = p
+26            p2 = p2.next
+27        }
+28        let temp = p.next
+29        p.next = null
+30        p = temp
+31
+32    }
+33    p1.next = bigHead.next
+34    
+35    return smallHead.next
+36};
