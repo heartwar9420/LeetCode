@@ -1,4 +1,4 @@
-// Last updated: 2026/4/22 上午8:57:08
+// Last updated: 2026/5/6 上午9:48:24
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -12,26 +12,26 @@
 11 */
 12
 13function partition(head: ListNode | null, x: number): ListNode | null {
-14    let smallHead = new ListNode(-1)
-15    let bigHead = new ListNode(-1)
-16    let p1 = smallHead
-17    let p2 = bigHead
-18    let p = head
-19
-20    while(p !==null){
-21        if(p.val<x){
-22            p1.next = p
-23            p1 = p1.next
+14    let smallList = new ListNode(-1)
+15    let bigList = new ListNode(-1)
+16    let sp = smallList
+17    let bp = bigList
+18
+19    while (head!==null){
+20        if(head.val<x){
+21            sp.next = head
+22            head = head.next
+23            sp = sp.next
 24        }else{
-25            p2.next = p
-26            p2 = p2.next
-27        }
-28        let temp = p.next
-29        p.next = null
-30        p = temp
-31
-32    }
-33    p1.next = bigHead.next
-34    
-35    return smallHead.next
+25            bp.next = head
+26            head = head.next
+27            bp = bp.next
+28        }
+29    }
+30    if(sp!==null && bp!==null){
+31        sp.next = bigList.next
+32        bp.next=null
+33    }
+34    return smallList.next
+35
 36};
