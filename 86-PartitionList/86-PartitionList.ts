@@ -1,4 +1,4 @@
-// Last updated: 2026/5/6 上午9:48:24
+// Last updated: 2026/5/6 上午9:50:32
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -20,18 +20,16 @@
 19    while (head!==null){
 20        if(head.val<x){
 21            sp.next = head
-22            head = head.next
-23            sp = sp.next
-24        }else{
-25            bp.next = head
-26            head = head.next
-27            bp = bp.next
-28        }
-29    }
-30    if(sp!==null && bp!==null){
-31        sp.next = bigList.next
-32        bp.next=null
-33    }
-34    return smallList.next
-35
-36};
+22            sp = sp.next
+23        }else{
+24            bp.next = head
+25            bp = bp.next
+26        }
+27        head = head.next
+28    }
+29
+30    bp.next=null
+31    sp.next = bigList.next
+32    
+33    return smallList.next
+34};
