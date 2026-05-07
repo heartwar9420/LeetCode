@@ -1,4 +1,4 @@
-// Last updated: 2026/5/6 上午10:03:57
+// Last updated: 2026/5/7 上午10:20:56
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -12,41 +12,29 @@
 11 */
 12
 13function mergeKLists(lists: Array<ListNode | null>): ListNode | null {
-14    let k = lists.length
-15    if (k === 0) return null
-16    let interval = 1
-17    while (interval<k){
-18        for (let i = 0 ; i<k-interval;i += interval*2){
-19            lists[i] = mergeTwoLists(lists[i],lists[i+interval])
-20        }
-21        interval *= 2
-22    }
-23    return lists[0]
-24};
-25
-26function mergeTwoLists(list1:ListNode|null,list2 : ListNode|null):ListNode|null{
-27    let dummy = new ListNode(-1)
-28    let p = dummy
-29    let p1 = list1
-30    let p2 = list2
-31
-32    while (p1!==null && p2 !== null){
-33        if(p1.val<p2.val){
-34            p.next = p1
-35            p1 = p1.next
-36        }else{
-37            p.next = p2
-38            p2 = p2.next
-39        }
-40        p = p.next
-41    }
-42    if(p1!==null){
-43        p.next = p1
-44    }
-45    if(p2!==null){
-46        p.next = p2
-47    }
-48
-49    return dummy.next
-50}
-51
+14    if (lists.length===0) return null
+15
+16    let dummy = new ListNode(-1)
+17    let p = dummy
+18
+19    let pq = new PriorityQueue<ListNode | null>((a,b)=>a.val - b.val)
+20
+21    for (let i = 0 ; i <lists.length ; i++){
+22        if (lists[i]){
+23            pq.enqueue(lists[i])
+24        }
+25    }
+26    while (!pq.isEmpty()){
+27        let cur = pq.dequeue()
+28        p.next = cur;
+29        if (cur.next){
+30            pq.enqueue(cur.next)
+31        }
+32        p = p.next
+33    }
+34    return dummy.next
+35
+36
+37    
+38};
+39
