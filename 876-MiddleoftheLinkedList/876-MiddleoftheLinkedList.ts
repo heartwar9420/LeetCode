@@ -1,4 +1,4 @@
-// Last updated: 2026/5/6 上午11:08:21
+// Last updated: 2026/5/7 上午11:11:19
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -12,11 +12,11 @@
 11 */
 12
 13function middleNode(head: ListNode | null): ListNode | null {
-14    let slow = head
-15    let fast = head
-16    while (fast!==null&&fast.next!==null){
-17        slow = slow?.next
-18        fast = fast?.next?.next
-19    }
-20    return slow
+14    let slow = head , fast = head
+15    while(fast&&fast.next){
+16        fast = fast.next.next
+17        slow = slow.next
+18    }
+19    return slow
+20
 21};
