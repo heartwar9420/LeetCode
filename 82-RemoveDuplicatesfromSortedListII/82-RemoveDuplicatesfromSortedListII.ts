@@ -1,4 +1,4 @@
-// Last updated: 2026/5/7 上午9:44:17
+// Last updated: 2026/5/7 下午3:24:35
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -14,21 +14,21 @@
 13function deleteDuplicates(head: ListNode | null): ListNode | null {
 14    let dummy = new ListNode(-1)
 15    let p = dummy
-16    let cur = head
-17    while(cur){
-18        if(cur.next && cur.val === cur.next.val){
-19            while(cur.next && cur.val === cur.next.val){
-20                cur = cur.next;
+16    let q = head
+17    while (q){
+18        if(q.next && q.val === q.next.val){
+19            while (q.next && q.val === q.next.val){
+20                q = q.next
 21            }
-22            cur = cur.next
-23            if(cur === null){
+22            q = q.next
+23            if (q === null){
 24                p.next = null
 25            }
 26        }else{
-27            p.next = cur
-28            p = p.next
-29            cur = cur.next
+27            p.next = q
+28            q = q.next
+29            p = p.next
 30        }
 31    }
-32return dummy.next
+32    return dummy.next
 33};
