@@ -1,4 +1,4 @@
-// Last updated: 2026/5/7 上午10:00:09
+// Last updated: 2026/5/7 上午10:03:08
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -25,11 +25,6 @@
 24        }
 25        p = p.next
 26    }
-27    if (l1 === null){
-28        p.next = l2
-29    }
-30    if (l2 === null){
-31        p.next = l1
-32    }
-33    return dummy.next
-34};
+27    p.next = l1||l2
+28    return dummy.next
+29};
