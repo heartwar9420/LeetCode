@@ -1,4 +1,4 @@
-// Last updated: 2026/5/6 上午9:34:48
+// Last updated: 2026/5/7 上午10:00:09
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -12,26 +12,24 @@
 11 */
 12
 13function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
-14    let dummy = new ListNode(-1) , p = dummy;
-15    let p1 = list1 , p2 = list2
-16
-17    while(p1 !==null && p2 !==null){
-18        if(p1.val > p2.val){
-19            p.next = p2
-20            p2 = p2.next
+14    let l1 = list1 , l2 = list2
+15    let dummy = new ListNode(-1)
+16    let p = dummy
+17    while (l1&&l2){
+18        if(l1.val < l2.val){
+19            p.next = l1
+20            l1 = l1.next
 21        }else{
-22            p.next = p1
-23            p1 = p1.next
+22            p.next = l2
+23            l2 = l2.next
 24        }
 25        p = p.next
 26    }
-27    if (p1 !== null){
-28        p.next = p1
+27    if (l1 === null){
+28        p.next = l2
 29    }
-30    if(p2 !== null){
-31        p.next = p2
+30    if (l2 === null){
+31        p.next = l1
 32    }
-33
-34    return dummy.next
-35
-36};
+33    return dummy.next
+34};
