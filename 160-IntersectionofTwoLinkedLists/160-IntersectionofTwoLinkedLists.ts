@@ -1,4 +1,4 @@
-// Last updated: 2026/5/6 上午11:27:40
+// Last updated: 2026/5/7 上午11:24:01
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -12,15 +12,11 @@
 11 */
 12
 13function getIntersectionNode(headA: ListNode | null, headB: ListNode | null): ListNode | null {
-14    let p1 = headA
-15    let p2 = headB
-16    while (p1!==p2){
-17        if (p1 === null){
-18            p1 = headB
-19        }else p1 = p1.next
-20        if(p2 === null){
-21            p2 = headA
-22        }else p2 = p2.next
-23    }
-24    return p1
-25};
+14    let pa = headA
+15    let pb = headB
+16    while (pa!==pb){
+17        pa===null ? pa = headB : pa = pa.next;
+18        pb===null ? pb = headA : pb = pb.next;
+19    }
+20    return pa
+21};
