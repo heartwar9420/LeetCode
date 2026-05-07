@@ -1,4 +1,4 @@
-// Last updated: 2026/5/7 上午11:24:01
+// Last updated: 2026/5/7 上午11:26:59
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -15,7 +15,7 @@
 14    let pa = headA
 15    let pb = headB
 16    while (pa!==pb){
-17        pa===null ? pa = headB : pa = pa.next;
+17        pa = pa ? pa.next : headB;
 18        pb===null ? pb = headA : pb = pb.next;
 19    }
 20    return pa
