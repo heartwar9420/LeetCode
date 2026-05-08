@@ -1,19 +1,15 @@
-// Last updated: 2026/5/7 下午5:09:38
+// Last updated: 2026/5/8 下午5:29:07
 1function findDuplicate(nums: number[]): number {
-2    let slow = nums[0]
-3    let fast = nums[nums[0]]
-4    if(slow === fast) return slow
-5    while(fast!==slow){
-6        slow = nums[slow]
-7        fast = nums[nums[fast]]
-8        if(fast ===slow){
-9            break
-10        }
-11    }
-12    slow = 0
-13    while(fast!==slow){
-14        slow = nums[slow]
-15        fast = nums[fast]
-16    }
-17    return slow
-18};
+2    let slow = 0 , fast = 0
+3    while(true){
+4        fast = nums[nums[fast]]
+5        slow = nums[slow]
+6        if(slow===fast) break
+7    }
+8    slow = 0
+9    while(slow!==fast){
+10        fast = nums[fast]
+11        slow = nums[slow]
+12    }
+13    return slow
+14};
