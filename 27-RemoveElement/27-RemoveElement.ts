@@ -1,12 +1,13 @@
-// Last updated: 2026/5/7 下午1:42:18
+// Last updated: 2026/5/8 下午5:08:05
 1function removeElement(nums: number[], val: number): number {
-2    let slow = 0 , fast = 0 
-3    while (fast<nums.length){
-4        if(nums[fast]!==val){
-5            nums[slow]=nums[fast]
-6            slow++
-7        }
-8            fast++
-9    }
-10    return slow
-11};
+2    let slow = 0
+3    let fast = 0
+4    while(fast<nums.length){
+5        if(nums[fast]!==val){
+6            nums[slow]=nums[fast]
+7            slow++
+8        }
+9        fast++
+10    }
+11    return slow
+12};
