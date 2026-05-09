@@ -1,35 +1,51 @@
-// Last updated: 2026/5/9 上午9:41:50
+// Last updated: 2026/5/9 上午9:46:45
 1function longestPalindrome(s: string): string {
-2    if (s.length < 1) return "";
-3    
-4    // 用來紀錄目前找到最長迴文的起始與結束索引
-5    let start = 0;
-6    let end = 0;
-7
-8    // 輔助函式：現在它只回傳「擴散後的總長度」
-9    const expand = (l: number, r: number): number => {
-10        while (l >= 0 && r < s.length && s[l] === s[r]) {
-11            l--;
-12            r++;
-13        }
-14        // 回圈跳出時，l 和 r 已經多跑了一格，所以長度是 (r - 1) - (l + 1) + 1 = r - l - 1
-15        return r - l - 1;
-16    };
-17
-18    for (let i = 0; i < s.length; i++) {
-19        // 取得兩種擴散方式的長度
-20        const len1 = expand(i, i);     // 奇數擴散 (如 aba)
-21        const len2 = expand(i, i + 1); // 偶數擴散 (如 abba)
-22        const maxLen = Math.max(len1, len2);
-23
-24        // 如果這次找到的比之前紀錄的還要長，就更新索引
-25        if (maxLen > end - start) {
-26            // 這裡的數學計算是為了從中心點 i 往回推算出正確的 start 和 end
-27            start = i - Math.floor((maxLen - 1) / 2);
-28            end = i + Math.floor(maxLen / 2);
-29        }
-30    }
-31
-32    // 整個 function 只在這裡做一次 substring，效能最優！
-33    return s.substring(start, end + 1);
-34}
+2    if (s.length <= 1) return s;
+3
+4    // 1. 預處理字串：aba -> #a#b#a#
+5    let t = "#" + s.split("").join("#") + "#";
+6    const n = t.length;
+7    
+8    // p[i] 紀錄以 i 為中心向外擴散的半徑（包含中心點自己）
+9    const p = new Array(n).fill(0);
+10    
+11    let center = 0; // 目前最右邊界迴文的中心
+12    let right = 0;  // 目前最右邊界迴文的右邊界
+13    
+14    let maxLen = 0;
+15    let centerIndex = 0;
+16
+17    for (let i = 0; i < n; i++) {
+18        // --- 核心優化：利用對稱性 ---
+19        if (i < right) {
+20            let mirror = 2 * center - i; // i 關於 center 的對稱點
+21            // 點睛之筆：取「鏡子長度」與「到邊界距離」的最小值
+22            p[i] = Math.min(right - i, p[mirror]);
+23        }
+24
+25        // --- 嘗試繼續往外擴散（在對稱性的基礎上繼續試探） ---
+26        let l = i - (p[i] + 1);
+27        let r = i + (p[i] + 1);
+28        while (l >= 0 && r < n && t[l] === t[r]) {
+29            p[i]++;
+30            l--;
+31            r++;
+32        }
+33
+34        // --- 如果擴散出的範圍超過了之前的最右邊界，就更新中心 ---
+35        if (i + p[i] > right) {
+36            center = i;
+37            right = i + p[i];
+38        }
+39
+40        // 紀錄最長半徑的位置
+41        if (p[i] > maxLen) {
+42            maxLen = p[i];
+43            centerIndex = i;
+44        }
+45    }
+46
+47    // 3. 從預處理過的字串切出結果，並拿掉 #
+48    let start = (centerIndex - maxLen) / 2;
+49    return s.substring(start, start + maxLen);
+50}
