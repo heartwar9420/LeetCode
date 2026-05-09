@@ -1,4 +1,4 @@
-// Last updated: 2026/5/8 下午4:27:22
+// Last updated: 2026/5/9 上午10:22:08
 1/**
 2 * Definition for singly-linked list.
 3 * class ListNode {
@@ -12,26 +12,23 @@
 11 */
 12
 13function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-14    let p1 = l1 , p2 = l2
-15    let dummy = new ListNode(-1)
-16    let p = dummy
-17    let carry = 0
-18    while(p1||p2||carry>0){
-19        let val = carry
-20        if(p1){
-21            val += p1.val
-22            p1 = p1.next
-23        }
-24        if(p2){
-25            val += p2.val
-26            p2 = p2.next
-27        }
-28        carry = Math.floor(val/10)
-29        val = val%10
-30        p.next = new ListNode(val)
-31        p = p.next
-32    }
-33    return dummy.next
-34
-35    
-36};
+14    let dummy = new ListNode(-1)
+15    let p = dummy
+16    let carry = 0
+17    while(l1||l2||carry>0){
+18        let val = carry
+19        if(l1){
+20            val += l1.val
+21            l1 = l1.next
+22        }
+23        if(l2){
+24            val += l2.val
+25            l2 = l2.next
+26        }
+27        carry = Math.floor(val/10)
+28        val = val%10
+29        p.next = new ListNode(val)
+30        p = p.next
+31    }
+32    return dummy.next
+33};
