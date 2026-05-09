@@ -1,14 +1,11 @@
-// Last updated: 2026/5/8 下午4:41:59
+// Last updated: 2026/5/9 上午10:37:37
 1function removeDuplicates(nums: number[]): number {
-2    if (nums.length === 0) return 0;
-3    
-4    let slow = 0;
-5    // fast 從 1 開始探路，因為索引 0 預設就是第一個不重複的數字
-6    for (let fast = 1; fast < nums.length; fast++) {
-7        if (nums[slow] !== nums[fast]) {
-8            slow++;
-9            nums[slow] = nums[fast];
-10        }
-11    }
-12    return slow + 1;
-13}
+2    let slow = 0
+3    for(let fast = 0 ; fast < nums.length ; fast++){
+4        if(nums[slow]!==nums[fast]){
+5            slow ++
+6            nums[slow]=nums[fast]
+7        }
+8    }
+9    return slow+1
+10};
