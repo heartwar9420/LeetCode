@@ -1,18 +1,23 @@
-// Last updated: 2026/5/10 下午1:53:33
-1function isPalindrome(s: string): boolean {
-2    let left = 0 , right = s.length-1
-3    while(left<right){
-4        if(!/[a-zA-Z0-9]/.test(s[left])){
-5            left++
-6        }else if (!/[a-zA-Z0-9]/.test(s[right])){
-7            right--
-8        }else{
-9            if(s[left].toLowerCase()!==s[right].toLowerCase()){
-10                return false
-11            }
-12                left++
-13                right--
-14        }
-15    }
-16    return true
-17};
+// Last updated: 2026/5/10 下午1:59:48
+function isPalindrome(s: string): boolean {
+    let start = 0;
+    let end = s.length - 1;
+    while (start < end) {
+        while (start < end && !isLetter(s[start])) {
+            start++;
+        }
+        while (start < end && !isLetter(s[end])) {
+            end--;
+        }
+        if ( (s[start]).toLowerCase() !== (s[end]).toLowerCase()) {
+            return false;
+        }
+        start++;
+        end--;
+    }
+    return true;
+};
+
+function isLetter(ch: string) {
+    return /^[a-zA-Z0-9]$/.test(ch);
+}
